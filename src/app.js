@@ -9,9 +9,12 @@ const medicoRoutes = require("./routes/medicoRoutes");
 const pacienteRoutes = require("./routes/pacienteRoutes");
 const categoriaExameRoutes = require("./routes/categoriaExameRoutes");
 const tipoExameRoutes = require("./routes/tipoExameRoutes");
+const agendamentoExameRoutes = require("./routes/agendamentoExameRoutes");
+
 const authMiddleware = require("./middlewares/authMiddleware");
 const requireRole = require("./middlewares/roleMiddleware");
 
+<<<<<<< HEAD
 // ======================
 // NOVAS ROTAS
 // ======================
@@ -19,6 +22,8 @@ const avatarRoutes = require("./routes/avatarRoutes");
 const notificacaoRoutes = require("./routes/notificacaoRoutes");
 const configuracaoRoutes = require("./routes/configuracaoRoutes");
 
+=======
+>>>>>>> c117d01 (Implementa agendamento dinâmico de exames)
 const app = express();
 
 // ======================
@@ -33,8 +38,9 @@ app.use(express.json());
 app.use("/usuarios", userRoutes);
 app.use("/medicos", authMiddleware, requireRole("admin"), medicoRoutes);
 app.use("/pacientes", authMiddleware, requireRole("admin"), pacienteRoutes);
-app.use("/categorias-exames", authMiddleware, requireRole("admin"), categoriaExameRoutes);
-app.use("/tipos-exames", authMiddleware, requireRole("admin"), tipoExameRoutes);
+app.use("/categorias-exames", categoriaExameRoutes);
+app.use("/tipos-exames", tipoExameRoutes);
+app.use("/agendamentos-exames", agendamentoExameRoutes);
 
 <<<<<<< HEAD
 module.exports = app;
