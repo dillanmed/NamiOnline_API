@@ -10,7 +10,6 @@ const agendamentoExameRoutes = require("./routes/agendamentoExameRoutes");
 const retornoRoutes = require("./routes/retornoRoutes");
 const notificacaoRoutes = require("./routes/notificacaoRoutes");
 const configuracaoRoutes = require("./routes/configuracaoRoutes");
-const avatarRoutes = require("./routes/Avatarroutes");
 const guiaRoutes = require("./routes/guiaRoutes");
 const especialidadeRoutes = require("./routes/especialidadeRoutes");
 const consultaRoutes = require("./routes/consultaRoutes");
@@ -41,8 +40,6 @@ app.use("/retornos", retornoRoutes);
 
 app.use("/notificacoes", notificacaoRoutes);
 app.use("/configuracoes", configuracaoRoutes);
-app.use("/configuracoes/avatar", avatarRoutes);
-
 app.use("/guias", guiaRoutes);
 app.use("/especialidades", especialidadeRoutes);
 
