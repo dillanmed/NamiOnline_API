@@ -1,25 +1,28 @@
 const Configuracao = require("../models/Configuracao");
 
-// buscar config
+// ==========================
+// BUSCAR CONFIGURAÇÕES
+// ==========================
 exports.buscarConfiguracoes = async (req, res) => {
   try {
-    const config = await Configuracao.findOne();
+    let config = await Configuracao.findOne();
 
     if (!config) {
-      const novaConfig = await Configuracao.create({});
-      return res.json(novaConfig);
+      config = await Configuracao.create({});
     }
 
-    res.json(config);
+    return res.json(config);
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       mensagem: "Erro ao buscar configurações",
       erro: error.message,
     });
   }
 };
 
-// salvar tema
+// ==========================
+// SALVAR TEMA
+// ==========================
 exports.salvarTema = async (req, res) => {
   try {
     const { tema } = req.body;
@@ -30,20 +33,22 @@ exports.salvarTema = async (req, res) => {
       { new: true, upsert: true }
     );
 
-    res.json({
+    return res.json({
       sucesso: true,
       mensagem: "Tema salvo com sucesso",
       configuracoes: config,
     });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       mensagem: "Erro ao salvar tema",
       erro: error.message,
     });
   }
 };
 
-// salvar notificacoes
+// ==========================
+// SALVAR NOTIFICAÇÕES
+// ==========================
 exports.salvarNotificacoes = async (req, res) => {
   try {
     const { notificacoes } = req.body;
@@ -54,14 +59,14 @@ exports.salvarNotificacoes = async (req, res) => {
       { new: true, upsert: true }
     );
 
-    res.json({
+    return res.json({
       sucesso: true,
-      mensagem: "Notificacoes salvas com sucesso",
+      mensagem: "Notificações atualizadas com sucesso",
       configuracoes: config,
     });
   } catch (error) {
-    res.status(500).json({
-      mensagem: "Erro ao salvar notificacoes",
+    return res.status(500).json({
+      mensagem: "Erro ao atualizar notificações",
       erro: error.message,
     });
   }
