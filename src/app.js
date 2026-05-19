@@ -30,25 +30,23 @@ app.use(express.json({ limit: "15mb" }));
 app.use(express.urlencoded({ extended: true, limit: "15mb" }));
 
 app.use("/usuarios", userRoutes);
-app.use("/medicos", authMiddleware, requireRole("admin"), medicoRoutes);
+app.use("/medicos", authMiddleware, medicoRoutes);
 app.use("/pacientes", authMiddleware, requireRole("admin"), pacienteRoutes);
 app.use("/categorias-exames", authMiddleware, requireRole("admin"), categoriaExameRoutes);
 app.use("/tipos-exames", authMiddleware, requireRole("admin"), tipoExameRoutes);
 app.use("/agendamentos-exames", agendamentoExameRoutes);
 app.use("/retornos", retornoRoutes);
-
 app.use("/notificacoes", notificacaoRoutes);
 app.use("/configuracoes", configuracaoRoutes);
 app.use("/guias", guiaRoutes);
 app.use("/especialidades", especialidadeRoutes);
-
-app.use("/consultas", authMiddleware, consultaRoutes);
-app.use("/meus-agendamentos", meusAgendamentosRoutes);
-
 app.use("/horarios-fixos", horariosFixosRoutes);
 app.use("/agenda-bloqueios", agendaBloqueioRoutes);
 app.use("/noticias", noticiasRoutes);
 app.use("/eventos", eventosRoutes);
 app.use("/chat", chatRoutes);
+
+app.use("/consultas", authMiddleware, consultaRoutes);
+app.use("/meus-agendamentos", authMiddleware, meusAgendamentosRoutes);
 
 module.exports = app;
