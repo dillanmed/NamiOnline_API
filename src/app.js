@@ -18,6 +18,7 @@ const agendaBloqueioRoutes = require("./routes/agendaBloqueioRoutes");
 const horariosFixosRoutes = require("./routes/horariosFixosRoutes");
 const noticiasRoutes = require("./routes/noticiasRoutes");
 const eventosRoutes = require("./routes/eventosRoutes");
+const chatRoutes = require("./routes/ChatRoutes");
 
 const authMiddleware = require("./middlewares/authMiddleware");
 const requireRole = require("./middlewares/roleMiddleware");
@@ -29,12 +30,10 @@ app.use(express.json({ limit: "15mb" }));
 app.use(express.urlencoded({ extended: true, limit: "15mb" }));
 
 app.use("/usuarios", userRoutes);
-
-app.use("/medicos", medicoRoutes);
-app.use("/pacientes", pacienteRoutes);
-
-app.use("/categorias-exames", categoriaExameRoutes);
-app.use("/tipos-exames", tipoExameRoutes);
+app.use("/medicos", authMiddleware, requireRole("admin"), medicoRoutes);
+app.use("/pacientes", authMiddleware, requireRole("admin"), pacienteRoutes);
+app.use("/categorias-exames", authMiddleware, requireRole("admin"), categoriaExameRoutes);
+app.use("/tipos-exames", authMiddleware, requireRole("admin"), tipoExameRoutes);
 app.use("/agendamentos-exames", agendamentoExameRoutes);
 app.use("/retornos", retornoRoutes);
 
@@ -50,5 +49,6 @@ app.use("/horarios-fixos", horariosFixosRoutes);
 app.use("/agenda-bloqueios", agendaBloqueioRoutes);
 app.use("/noticias", noticiasRoutes);
 app.use("/eventos", eventosRoutes);
+app.use("/chat", chatRoutes);
 
 module.exports = app;

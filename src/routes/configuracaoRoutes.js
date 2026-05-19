@@ -6,7 +6,7 @@ router.post("/tema", (req, res) => {
 
   const { tema } = req.body
 
- 
+  console.log("Tema:", tema)
 
   res.json({
     sucesso: true,
@@ -16,4 +16,4 @@ router.post("/tema", (req, res) => {
 
 })
 
-module.exports = router
+module.exports = router;
