@@ -5,9 +5,8 @@ const connectDatabase = require("./config/database");
 
 const PORT = process.env.PORT || 3000;
 
-// ======================
 // INICIAR SERVIDOR
-// ======================
+
 async function startServer() {
   try {
     await connectDatabase();
